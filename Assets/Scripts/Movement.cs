@@ -5,11 +5,11 @@ using UnityEngine;
 public class Movement1 : MonoBehaviour
 {
     private Vector3 lastpos = new Vector3(0, 0, 0);
-    public float moveSpeed = 10;
+    public float moveSpeed = 2;
     public float turnspeed = 180;
     public GameObject bodyPrefab;
     public GameObject TailPrefab;
-    public int gap = 1000;
+    public int gap = 100;
     public List<GameObject> BodyList = new List<GameObject>();
     private List<Vector3> positionHistory = new List<Vector3>();
     // Start is called before the first frame update
