@@ -1,0 +1,33 @@
+# Ignore build artifacts
+/obj/
+/bin/
+
+# Ignore Visual Studio files
+.vs/
+.vscode/
+/.vsconfig
+
+# Ignore Unity specific files
+Library/
+Temp/
+Logs/
+UserSettings/
+
+# Ignore package dependencies
+Packages/
+
+# Ignore auto-generated files
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+*.sln
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore any other generated files or temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.lock
