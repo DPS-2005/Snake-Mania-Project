@@ -5,13 +5,20 @@ using UnityEngine;
 public class Movement1 : MonoBehaviour
 {
     private Vector3 lastpos = new Vector3(0, 0, 0);
-    public float moveSpeed = 2;
+    public float moveSpeed = 5;
     public float turnspeed = 180;
+    public float bodyMoveSpeed =5;
     public GameObject bodyPrefab;
     public GameObject TailPrefab;
     public int gap = 100;
     public List<GameObject> BodyList = new List<GameObject>();
     private List<Vector3> positionHistory = new List<Vector3>();
+    
+    // for wriggling
+    // public GameObject cam;
+    // public int turnLimit = 50;
+    // private int meowmeow = 0;
+    // private bool turnflag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +27,7 @@ public class Movement1 : MonoBehaviour
         IncreaseLength();
         IncreaseLength();
         IncreaseLength();
+        
     }
 
     // Update is called once per frame
@@ -27,7 +35,16 @@ public class Movement1 : MonoBehaviour
     {
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
         float turn = Input.GetAxis("Horizontal");
+        // Debug.Log(turn);
         transform.Rotate(transform.up, turnspeed * turn * Time.deltaTime);
+
+        // For Wriggling. Not perfect yet. Causes jitter. Needs better solution
+        // if(meowmeow>turnLimit){  turnflag = !turnflag; meowmeow = 0;}
+        // Debug.Log(turnflag+" "+meowmeow);
+        // meowmeow++;
+        // transform.Rotate(transform.up, (int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.9) + turnspeed * turn * Time.deltaTime);
+        // cam.transform.Rotate(transform.up, -(int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.6));
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             IncreaseLength();
@@ -47,7 +64,7 @@ public class Movement1 : MonoBehaviour
             Vector3 point = positionHistory[Mathf.Min(ans, positionHistory.Count - 1)];
             Vector3 pointDir = (point - body.transform.position).normalized;
             // Debug.Log(index + " " + point);
-            body.transform.position += pointDir * moveSpeed * Time.deltaTime;
+            body.transform.position += pointDir * bodyMoveSpeed * Time.deltaTime;
             body.transform.LookAt(point);
             index++;
 
