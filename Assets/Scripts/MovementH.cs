@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement1 : MonoBehaviour
+public class MovementH : MonoBehaviour
 {
     //need to add json or other format to save some datapoints
     private struct CurrentModel{
