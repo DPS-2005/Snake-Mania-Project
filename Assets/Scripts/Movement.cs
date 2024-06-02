@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Movement : MonoBehaviour
+public class Movement1 : MonoBehaviour
 {
     public float moveSpeed = 5;
     public float turnspeed = 180;
