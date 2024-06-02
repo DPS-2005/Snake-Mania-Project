@@ -429,9 +429,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4672923815663259638, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
         type: 3}
+      propertyPath: gap
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672923815663259638, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
+        type: 3}
       propertyPath: moveSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4672923815663259638, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
+        type: 3}
+      propertyPath: BodyPrefab
+      value: 
+      objectReference: {fileID: 2290557552424802089, guid: 3666d8824179c7442acff4ca3d470afa,
+        type: 3}
     - target: {fileID: 4672923815663259638, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
         type: 3}
       propertyPath: TailPrefab
