@@ -24,6 +24,8 @@ public class Movement1 : MonoBehaviour
     void Start()
     {
         AddTail();
+        IncreaseLength();
+        
     }
 
     void Update()
@@ -47,14 +49,16 @@ public class Movement1 : MonoBehaviour
 
         //moving each body part to its next position
         float initial_speed = moveSpeed;
+        Debug.Log("count:"+BodyList.Count);
         for (int i = 0; i < BodyList.Count; i++)
         {
             Transform point;
             GameObject body = BodyList[i];
             if (i == 0)
-                point = head.transform;
+                point = transform;
             else
                 point = BodyList[i - 1].transform;
+                Debug.Log(point.position);
             Vector3 pointDir = (point.position - body.transform.position).normalized;
             bodyMoveSpeed = Vector3.Dot(pointDir, point.forward) * initial_speed;
             initial_speed = bodyMoveSpeed;
@@ -76,8 +80,10 @@ public class Movement1 : MonoBehaviour
     }
 
     void AddTail()
-    {
+    {   
+        tail =Instantiate(bodyPrefab, transform.position, transform.rotation);
         BodyList.Add(tail);
+        
     }
 
     void Grow(int n)
