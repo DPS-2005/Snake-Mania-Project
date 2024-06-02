@@ -1,41 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Movement1 : MonoBehaviour
 {
-    private Vector3 lastpos = new Vector3(0, 0, 0);
     public float moveSpeed = 5;
     public float turnspeed = 180;
     public float bodyMoveSpeed =5;
     public GameObject bodyPrefab;
-    public GameObject TailPrefab;
-    public int gap = 100;
+    public GameObject head;
+    public GameObject tail;
+    public float gap;
     public List<GameObject> BodyList = new List<GameObject>();
-    private List<Vector3> positionHistory = new List<Vector3>();
     
     // for wriggling
     // public GameObject cam;
     // public int turnLimit = 50;
     // private int meowmeow = 0;
     // private bool turnflag = false;
-    // Start is called before the first frame update
     void Start()
     {
         AddTail();
-        IncreaseLength();
-        IncreaseLength();
-        IncreaseLength();
-        IncreaseLength();
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Head Movement
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
         float turn = Input.GetAxis("Horizontal");
-        // Debug.Log(turn);
         transform.Rotate(transform.up, turnspeed * turn * Time.deltaTime);
 
         // For Wriggling. Not perfect yet. Causes jitter. Needs better solution
@@ -47,47 +41,47 @@ public class Movement1 : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            IncreaseLength();
+            Grow(10);
         }
-        positionHistory.Insert(0, transform.position);
 
-        // for keeping the list to only a certain length
-        // Debug.Log(positionHistory.Count + " " + positionHistory[0] + " " + positionHistory[positionHistory.Count-1]);
-        // if(positionHistory.Count > 1000){positionHistory.RemoveRange(1000,1);}
-        int index = 0;
-        int ans = new int();
-        foreach (GameObject body in BodyList)
+        //moving each body part to its next position
+        for (int i = 0; i < BodyList.Count; i++)
         {
-            ans = index * gap;
-            // Debug.Log("ans "+ans);
-
-            Vector3 point = positionHistory[Mathf.Min(ans, positionHistory.Count - 1)];
+            Vector3 point;
+            GameObject body = BodyList[i];
+            if (i == 0)
+                point = head.transform.position;
+            else
+                point = BodyList[i - 1].transform.position;
             Vector3 pointDir = (point - body.transform.position).normalized;
-            // Debug.Log(index + " " + point);
             body.transform.position += pointDir * bodyMoveSpeed * Time.deltaTime;
             body.transform.LookAt(point);
-            index++;
-
+            if(i == 5)
+            {
+                //body.transform.Rotate(transform.up, turnspeed * (0.2f-Mathf.PingPong(Time.time, 0.4f)));
+            }
         }
-        lastpos = positionHistory[Mathf.Min(ans, positionHistory.Count - 1)];
-
-        // foreach(var pos in positionHistory){
-        //     Debug.Log(pos);
-        // }
-
-
     }
 
     void IncreaseLength()
     {
-        GameObject body = Instantiate(bodyPrefab);
-        body.transform.position = lastpos;
+        GameObject tail = BodyList.Last();
+        GameObject body = Instantiate(bodyPrefab, tail.transform.position, tail.transform.rotation);
         BodyList.Insert(BodyList.Count - 1, body);
+        tail.transform.position -= tail.transform.forward * gap;        
     }
+
     void AddTail()
     {
-        GameObject body = Instantiate(TailPrefab);
-        body.transform.position = lastpos;
-        BodyList.Add(body);
+        BodyList.Add(tail);
     }
+
+    void Grow(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            IncreaseLength();
+        }
+    }
+
 }
