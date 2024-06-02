@@ -55,7 +55,10 @@ public class Movement : MonoBehaviour
             Transform point;
             GameObject body = BodyList[i];
             if (i == 0)
-                point = transform;
+                {point = transform;
+                
+                body.transform.GetChild(1).gameObject.SetActive(false);
+                body.GetComponent<MeshRenderer>().enabled=false;}
             else
                 point = BodyList[i - 1].transform;
                 //Debug.Log(point.position);
