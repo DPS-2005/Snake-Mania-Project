@@ -8,7 +8,8 @@ public class Movement1 : MonoBehaviour
 {
     public float moveSpeed = 5;
     public float turnspeed = 180;
-    public float bodyMoveSpeed =5;
+    private float bodyMoveSpeed;
+    public int growCount;
     public GameObject bodyPrefab;
     public GameObject head;
     public GameObject tail;
@@ -41,19 +42,22 @@ public class Movement1 : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Grow(10);
+            Grow(growCount);
         }
 
         //moving each body part to its next position
+        float initial_speed = moveSpeed;
         for (int i = 0; i < BodyList.Count; i++)
         {
-            Vector3 point;
+            Transform point;
             GameObject body = BodyList[i];
             if (i == 0)
-                point = head.transform.position;
+                point = head.transform;
             else
-                point = BodyList[i - 1].transform.position;
-            Vector3 pointDir = (point - body.transform.position).normalized;
+                point = BodyList[i - 1].transform;
+            Vector3 pointDir = (point.position - body.transform.position).normalized;
+            bodyMoveSpeed = Vector3.Dot(pointDir, point.forward) * initial_speed;
+            initial_speed = bodyMoveSpeed;
             body.transform.position += pointDir * bodyMoveSpeed * Time.deltaTime;
             body.transform.LookAt(point);
             if(i == 5)
