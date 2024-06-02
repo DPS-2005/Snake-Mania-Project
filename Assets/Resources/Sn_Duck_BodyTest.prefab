@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8237190035310965556}
   - component: {fileID: 172922490474108128}
   m_Layer: 0
-  m_Name: Sn_Duck_Body
+  m_Name: Sn_Duck_BodyTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

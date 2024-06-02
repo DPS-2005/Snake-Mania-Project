@@ -4,7 +4,12 @@ using UnityEngine;
 using Photon.Pun;
 
 public class RoomManager : MonoBehaviourPunCallbacks
-{    void Start()
+{    
+    public GameObject Player;
+    public Transform SpawnPoint;
+    
+    
+    void Start()
     {
         Debug.Log("Starting Connection");
         PhotonNetwork.ConnectUsingSettings();
@@ -23,5 +28,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         Debug.Log("Joined Lobby");
         PhotonNetwork.JoinOrCreateRoom("TestingPhaseRoom", null, null);
+    }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        Debug.Log("Joined Room");
+        GameObject _player = PhotonNetwork.Instantiate(Player.name, SpawnPoint.position, SpawnPoint.rotation);
+        _player.GetComponent<PlayerSetup>().isLocalPlayer();
     }
 }

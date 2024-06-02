@@ -56,6 +56,7 @@ public class Movement1 : MonoBehaviour
             GameObject body = BodyList[i];
             if (i == 0)
                 {point = transform;
+                
                 body.transform.GetChild(1).gameObject.SetActive(false);
                 body.GetComponent<MeshRenderer>().enabled=false;}
             else

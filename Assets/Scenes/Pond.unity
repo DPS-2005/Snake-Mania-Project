@@ -322,6 +322,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sn_Spir_Head
       objectReference: {fileID: 0}
+    - target: {fileID: 1604600736347843682, guid: 2e854cec0fb2a584c922cba4a53233c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4763880439206179992, guid: 2e854cec0fb2a584c922cba4a53233c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -503,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 1604600736347843682, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4672923815663259638, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
         type: 3}
