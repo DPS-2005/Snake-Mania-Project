@@ -12,8 +12,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 		set { _instance = value; }
 	}
 
-    public void Awake()
+    private void Awake()
     {
-        _instance = (T) (object) this;   
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = (T) (object) this;
+        DontDestroyOnLoad(this.gameObject);
     }
 }

@@ -49,7 +49,7 @@ public class Movement1 : MonoBehaviour
 
         //moving each body part to its next position
         float initial_speed = moveSpeed;
-        Debug.Log("count:"+BodyList.Count);
+        //Debug.Log("count:"+BodyList.Count);
         for (int i = 0; i < BodyList.Count; i++)
         {
             Transform point;
@@ -61,7 +61,7 @@ public class Movement1 : MonoBehaviour
                 body.GetComponent<MeshRenderer>().enabled=false;}
             else
                 point = BodyList[i - 1].transform;
-                Debug.Log(point.position);
+                //Debug.Log(point.position);
             Vector3 pointDir = (point.position - body.transform.position).normalized;
             bodyMoveSpeed = Vector3.Dot(pointDir, point.forward) * initial_speed;
             initial_speed = bodyMoveSpeed;
