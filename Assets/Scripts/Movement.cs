@@ -16,6 +16,10 @@ public class Movement1 : MonoBehaviourPunCallbacks
     public GameObject tail;
     public float gap;
     public List<GameObject> BodyList = new List<GameObject>();
+
+    public bool isLocalPlayer = false;
+    public  int lastLength = 0;
+    public int ll =0;
     
     // for wriggling
     // public GameObject cam;
@@ -25,7 +29,10 @@ public class Movement1 : MonoBehaviourPunCallbacks
     void Start()
     {
         AddTail();
-        IncreaseLength();
+        for(int i =0 ; i<=ll; i++){
+            IncreaseLength();
+        }
+        
         
     }
 
@@ -50,9 +57,9 @@ public class Movement1 : MonoBehaviourPunCallbacks
 
 
         //check if photonnewtowrk destroy is needed
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && isLocalPlayer)
         {   
-            RoomManager.instance.RespawnPlayer();
+            RoomManager.instance.RespawnPlayer(lastLength);
             destroyParts();
             Destroy(gameObject);
             
@@ -92,7 +99,8 @@ public class Movement1 : MonoBehaviourPunCallbacks
         // 
         GameObject body = PhotonNetwork.Instantiate(bodyPrefab.name, tail.transform.position, tail.transform.rotation);
         BodyList.Insert(BodyList.Count - 1, body);
-        tail.transform.position -= tail.transform.forward * gap;        
+        tail.transform.position -= tail.transform.forward * gap;    
+        lastLength++;    
     }
 
     void AddTail()
@@ -109,6 +117,9 @@ public class Movement1 : MonoBehaviourPunCallbacks
             IncreaseLength();
         }
     }
+
+
+    //Raat ke 2 baj gaye hai. Ab mujhe kuch nahi samajh aa raha mai kya code likh raha hoon. 🥲. ALso ham ek hi script me hi kyun sab daal raheee.?
     void destroyParts(){
         for (int i = 0; i < BodyList.Count; i++)
         {

@@ -11,7 +11,7 @@ using UnityEngine;
 public class LevelModel
 {
     public string levelID;
-    public SceneAsset scene;
+    public UnityEngine.Object scene;
     public int highScore;
     public int currentScore;
     public int deltaScore;
