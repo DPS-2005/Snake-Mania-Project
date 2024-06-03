@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Photon.Pun;
 
-public class Movement1 : MonoBehaviour
+public class Movement1 : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5;
     public float turnspeed = 180;
@@ -77,14 +78,14 @@ public class Movement1 : MonoBehaviour
     void IncreaseLength()
     {
         GameObject tail = BodyList.Last();
-        GameObject body = Instantiate(bodyPrefab, tail.transform.position, tail.transform.rotation);
+        GameObject body = PhotonNetwork.Instantiate(bodyPrefab.name, tail.transform.position, tail.transform.rotation);
         BodyList.Insert(BodyList.Count - 1, body);
         tail.transform.position -= tail.transform.forward * gap;        
     }
 
     void AddTail()
     {   
-        tail =Instantiate(bodyPrefab, transform.position, transform.rotation);
+        tail =PhotonNetwork.Instantiate(bodyPrefab.name, transform.position, transform.rotation);
         BodyList.Add(tail);
         
     }
