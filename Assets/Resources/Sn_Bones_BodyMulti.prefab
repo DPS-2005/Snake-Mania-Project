@@ -428,7 +428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 0}
-  Head: {fileID: 0}
 --- !u!4 &4481466952433596443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5122133006673888163, guid: 6d304008fbf5ed7488b25c0d8b053fcc,

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8673598501737841605}
   - component: {fileID: 1934397901602518955}
   m_Layer: 0
-  m_Name: Sn_Duck_HeadTest
+  m_Name: Sn_Duck_HeadMulti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

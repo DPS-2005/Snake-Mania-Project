@@ -61,7 +61,7 @@ MonoBehaviour:
     type: 3}
   head: {fileID: 1604600736347843682}
   tail: {fileID: 2290557552424802089, guid: 6e5a3dcd69712964a8bfd77f09c77ea5, type: 3}
-  gap: 1.5
+  gap: 2.1
   BodyList: []
 --- !u!114 &8771421401580553839
 MonoBehaviour:
