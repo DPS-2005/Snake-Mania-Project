@@ -83,6 +83,9 @@ MonoBehaviour:
   tail: {fileID: 2290557552424802089, guid: 204fe3562e924f343a308aae2f2124a5, type: 3}
   gap: 1
   BodyList: []
+  isLocalPlayer: 0
+  lastLength: 0
+  ll: 0
 --- !u!114 &8673598501737841605
 MonoBehaviour:
   m_ObjectHideFlags: 0
