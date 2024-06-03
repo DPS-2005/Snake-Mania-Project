@@ -48,6 +48,16 @@ public class Movement1 : MonoBehaviourPunCallbacks
             Grow(growCount);
         }
 
+
+        //check if photonnewtowrk destroy is needed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {   
+            RoomManager.instance.RespawnPlayer();
+            destroyParts();
+            Destroy(gameObject);
+            
+        }
+
         //moving each body part to its next position
         float initial_speed = moveSpeed;
         //Debug.Log("count:"+BodyList.Count);
@@ -97,6 +107,13 @@ public class Movement1 : MonoBehaviourPunCallbacks
         for (int i = 0; i < n; i++)
         {
             IncreaseLength();
+        }
+    }
+    void destroyParts(){
+        for (int i = 0; i < BodyList.Count; i++)
+        {
+            GameObject body = BodyList[i];
+            Destroy(body);
         }
     }
 
