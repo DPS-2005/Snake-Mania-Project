@@ -5,7 +5,8 @@ using Photon.Pun;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {    
-    public GameObject Player;
+    public List<GameObject> Player;
+    public int playermodel = 0;
     public Transform SpawnPoint;
     
     
@@ -13,6 +14,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Starting Connection");
         PhotonNetwork.ConnectUsingSettings();
+        if(playermodel>=Player.Count){playermodel=Player.Count-1;}
         
     }
 
@@ -34,7 +36,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log("Joined Room");
-        GameObject _player = PhotonNetwork.Instantiate(Player.name, SpawnPoint.position, SpawnPoint.rotation);
+        GameObject _player = PhotonNetwork.Instantiate(Player[playermodel].name, SpawnPoint.position, SpawnPoint.rotation);
         _player.GetComponent<PlayerSetup>().isLocalPlayer();
     }
 }

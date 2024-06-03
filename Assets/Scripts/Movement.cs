@@ -78,6 +78,8 @@ public class Movement1 : MonoBehaviourPunCallbacks
     void IncreaseLength()
     {
         GameObject tail = BodyList.Last();
+        
+        // 
         GameObject body = PhotonNetwork.Instantiate(bodyPrefab.name, tail.transform.position, tail.transform.rotation);
         BodyList.Insert(BodyList.Count - 1, body);
         tail.transform.position -= tail.transform.forward * gap;        
