@@ -7,15 +7,15 @@ public class spiralmoment : MonoBehaviour
 {
     [HideInInspector]
     public MeshRenderer meshRenderer;
-    public GameObject Head;
+    // public GameObject Head;
     // Start is called before the first frame update
     void Start()
     
     { //honestly useless
-        meshRenderer = this.GetComponent<MeshRenderer>();
-        if(Head.transform.position == transform.position){
-            meshRenderer.enabled = false;
-        }
+        // meshRenderer = this.GetComponent<MeshRenderer>();
+        // if(Head.transform.position == transform.position){
+        //     meshRenderer.enabled = false;
+        // }
     }
 
     // Update is called once per frame
