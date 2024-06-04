@@ -13,6 +13,11 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     public Transform[] foodSpawnPoints;
     public List<Transform> obstacleInstantiationPoints;
     public float obstacleArea;
+
+    private void Start()
+    {
+        SpawnFood();
+    }
     public void InstantiateObstacles()
     {
         foreach(var obstaclePoint in obstacleInstantiationPoints)

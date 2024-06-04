@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Scoring : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+
+    public TextMeshProUGUI text;
+    public SpawnManager spawnManager;
+
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "Obstacle" || collision.collider.tag == "Player")
         {
@@ -16,6 +21,10 @@ public class Scoring : MonoBehaviour
         if(collision.collider.tag == "Food")
         {
             GameManager.Instance.IncreaseScore();
+            Destroy(collision.gameObject);
+            text.text = "Score: " + GameManager.Instance.currentLevel.currentScore;
+            transform.GetComponent<Movement>().increased=true;
+            spawnManager.SpawnFood();
         }
     }
 

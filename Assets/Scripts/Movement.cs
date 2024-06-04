@@ -12,11 +12,12 @@ public class Movement : MonoBehaviourPunCallbacks
     private float bodyMoveSpeed;
     public int growCount;
     public GameObject bodyPrefab;
-    public GameObject tailPrefab;
+    public GameObject tailObject;
     public float gap;
     public List<GameObject> BodyList = new List<GameObject>();
     public int lastLength = 0;
     public int ll = 0;
+    public bool increased = false;
 
     // for wriggling
     // public GameObject cam;
@@ -26,10 +27,10 @@ public class Movement : MonoBehaviourPunCallbacks
     void Start()
     {
         AddTail();
-        for (int i = 0; i <= ll; i++)
-        {
-            IncreaseLength();
-        }
+        //for (int i = 0; i <= ll; i++)
+        //{
+        //    IncreaseLength();
+        //}
     }
 
     void Update()
@@ -46,17 +47,9 @@ public class Movement : MonoBehaviourPunCallbacks
         // transform.Rotate(transform.up, (int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.9) + turnspeed * turn * Time.deltaTime);
         // cam.transform.Rotate(transform.up, -(int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.6));
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Grow(growCount);
-        }
-
         RespawnAndDestroy();
 
-
-        //moving each body part to its next position
         float initial_speed = moveSpeed;
-        //Debug.Log("count:"+BodyList.Count);
         for (int i = 0; i < BodyList.Count; i++)
         {
             Transform point;
@@ -65,8 +58,8 @@ public class Movement : MonoBehaviourPunCallbacks
             {
                 point = transform;
 
-                body.transform.GetChild(1).gameObject.SetActive(false);
-                body.GetComponent<MeshRenderer>().enabled = false;
+                //body.transform.GetChild(1).gameObject.SetActive(false);
+                //body.GetComponent<MeshRenderer>().enabled = false;
             }
             else
                 point = BodyList[i - 1].transform;
@@ -75,6 +68,12 @@ public class Movement : MonoBehaviourPunCallbacks
             initial_speed = bodyMoveSpeed;
             body.transform.position += pointDir * bodyMoveSpeed * Time.deltaTime;
             body.transform.LookAt(point);
+        }
+        if(increased)
+        {
+            Grow();
+            moveSpeed = Mathf.Min(moveSpeed + 1, 40);
+            increased = false;
         }
     }
 
@@ -89,14 +88,14 @@ public class Movement : MonoBehaviourPunCallbacks
 
     protected virtual void AddTail()
     {
-        GameObject tail = Instantiate(tailPrefab, transform.position, transform.rotation);
-        BodyList.Add(tail);
+        //GameObject tail = Instantiate(tailPrefab, transform.position - transform.forward*gap, transform.rotation);
+        BodyList.Add(tailObject);
 
     }
 
-    void Grow(int n)
+    public void Grow()
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < growCount; i++)
         {
             IncreaseLength();
         }

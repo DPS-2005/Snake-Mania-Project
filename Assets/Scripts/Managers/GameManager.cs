@@ -19,6 +19,7 @@ public class GameManager : Singleton<GameManager>
         {
             levels[level.levelID] = level;
         }
+        levels.TryGetValue(SceneManager.GetActiveScene().name, out currentLevel);
     }
 
     public void IncreaseScore()
