@@ -13,8 +13,6 @@ Temp/
 Logs/
 UserSettings/
 
-# Ignore package dependencies
-Packages/
 
 # Ignore auto-generated files
 Assembly-CSharp.csproj
