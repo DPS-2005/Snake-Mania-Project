@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Danger
-  - collectible
+  - Food
+  - Prop
+  - Obstacle
+  - SpawnManager
   layers:
   - Default
   - TransparentFX
