@@ -61,7 +61,7 @@ public class Movement1 : MonoBehaviourPunCallbacks
         {   
             RoomManager.instance.RespawnPlayer(lastLength);
             destroyParts();
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
             
         }
 
@@ -124,7 +124,7 @@ public class Movement1 : MonoBehaviourPunCallbacks
         for (int i = 0; i < BodyList.Count; i++)
         {
             GameObject body = BodyList[i];
-            Destroy(body);
+            PhotonNetwork.Destroy(body);
         }
     }
 
