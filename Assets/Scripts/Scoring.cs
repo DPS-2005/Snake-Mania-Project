@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Scoring : MonoBehaviour
 {
-
-    public GameObject gameOverPanel;
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "Obstacle" || collision.collider.tag == "Player")

@@ -2363,6 +2363,9 @@ MonoBehaviour:
     highScore: 0
     currentScore: 0
     deltaScore: 1
+    obstacles: []
+    foods:
+    - {fileID: 8658843303910344160, guid: 762751819b561564bb7d9f0084f08396, type: 3}
   canvas: {fileID: 7324473657817286354, guid: 535c532f755c64942bb1398b160f6808, type: 3}
   currentLevel:
     levelID: 
@@ -2370,6 +2373,8 @@ MonoBehaviour:
     highScore: 0
     currentScore: 0
     deltaScore: 0
+    obstacles: []
+    foods: []
   paused: 1
 --- !u!1 &1868255958
 GameObject:

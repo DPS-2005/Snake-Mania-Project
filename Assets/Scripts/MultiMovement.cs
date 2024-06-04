@@ -42,7 +42,6 @@ public class MultiMovement : Movement
             RoomManager.instance.RespawnPlayer(lastLength);
             destroyParts();
             PhotonNetwork.Destroy(gameObject);
-
         }
     }
 
