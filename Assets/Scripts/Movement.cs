@@ -4,17 +4,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Photon.Pun;
+using System;
+using UnityEditor;
 
 public class Movement : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5;
+    public float maxSpeed;
     public float turnspeed = 180;
     private float bodyMoveSpeed;
     public int growCount;
     public GameObject bodyPrefab;
     public GameObject tailObject;
-    public float gap;
+    public int gap;
     public List<GameObject> BodyList = new List<GameObject>();
+    public List<Tuple<Vector3, Quaternion>> TransformHistory = new List<Tuple<Vector3, Quaternion>>();
     public int lastLength = 0;
     public int ll = 0;
     public bool increased = false;
@@ -39,7 +43,9 @@ public class Movement : MonoBehaviourPunCallbacks
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
         float turn = Input.GetAxis("Horizontal");
         transform.Rotate(transform.up, turnspeed * turn * Time.deltaTime);
-
+        TransformHistory.Insert(0, new Tuple<Vector3,Quaternion>(transform.position, transform.rotation));
+        if(TransformHistory.Count >= 1000)
+            TransformHistory.RemoveAt(TransformHistory.Count - 1);
         // For Wriggling. Not perfect yet. Causes jitter. Needs better solution
         // if(meowmeow>turnLimit){  turnflag = !turnflag; meowmeow = 0;}
         // Debug.Log(turnflag+" "+meowmeow);
@@ -49,30 +55,21 @@ public class Movement : MonoBehaviourPunCallbacks
 
         RespawnAndDestroy();
 
-        float initial_speed = moveSpeed;
-        for (int i = 0; i < BodyList.Count; i++)
+        int index = 1;
+        foreach (var body in BodyList)
         {
-            Transform point;
-            GameObject body = BodyList[i];
-            if (i == 0)
-            {
-                point = transform;
-
-                //body.transform.GetChild(1).gameObject.SetActive(false);
-                //body.GetComponent<MeshRenderer>().enabled = false;
-            }
-            else
-                point = BodyList[i - 1].transform;
-            Vector3 pointDir = (point.position - body.transform.position).normalized;
-            bodyMoveSpeed = Vector3.Dot(pointDir, point.forward) * initial_speed;
-            initial_speed = bodyMoveSpeed;
-            body.transform.position += pointDir * bodyMoveSpeed * Time.deltaTime;
-            body.transform.LookAt(point);
+            //Debug.Log(index * gap);
+            //Debug.Log(Mathf.Min(index * gap, TransformHistory.Count - 1));
+            Tuple<Vector3, Quaternion> point = TransformHistory[Mathf.Min(index * gap, TransformHistory.Count - 1)];
+            body.transform.position = point.Item1;     
+            body.transform.rotation = point.Item2;
+            index++;
         }
-        if(increased)
+
+        if (increased)
         {
             Grow();
-            moveSpeed = Mathf.Min(moveSpeed + 1, 40);
+            moveSpeed = Mathf.Min(moveSpeed + 1, maxSpeed);
             increased = false;
         }
     }
@@ -105,4 +102,5 @@ public class Movement : MonoBehaviourPunCallbacks
     {
 
     }
+
 }
