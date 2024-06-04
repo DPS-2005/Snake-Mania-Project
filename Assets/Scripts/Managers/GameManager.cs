@@ -29,11 +29,6 @@ public class GameManager : Singleton<GameManager>
             instantiatedCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
 
-        //testing
-        if(Input.GetKeyDown(KeyCode.O) && !paused)
-        {
-            GameOver();
-        }
     }
     public void Pause()
     {
@@ -67,5 +62,12 @@ public class GameManager : Singleton<GameManager>
         while (!loaded.isDone)
             yield return null;
         instantiatedCanvas = Instantiate(canvas);
+        LoadObstacles();
+    }
+
+    public void LoadObstacles()
+    {
+        GameObject SpawnManager = GameObject.FindGameObjectsWithTag("SpawnManager")[0];
+        SpawnManager.GetComponent<SpawnManager>().InstantiateObstacles();
     }
 }
