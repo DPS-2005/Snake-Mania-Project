@@ -43,7 +43,7 @@ public class Scoring : MonoBehaviour
         Time.timeScale = 1;
         GameManager.Instance.paused = false;
         GameManager.Instance.canvas.transform.GetChild(1).gameObject.SetActive(false);
-        StartCoroutine(GameManager.Instance.LoadSceneAsync());
+        GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel.levelID);
     }
 
     private void Update()

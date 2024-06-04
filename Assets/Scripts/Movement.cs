@@ -70,7 +70,6 @@ public class Movement : MonoBehaviourPunCallbacks
             }
             else
                 point = BodyList[i - 1].transform;
-            //Debug.Log(point.position);
             Vector3 pointDir = (point.position - body.transform.position).normalized;
             bodyMoveSpeed = Vector3.Dot(pointDir, point.forward) * initial_speed;
             initial_speed = bodyMoveSpeed;
