@@ -11,6 +11,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
    [Space]
    public GameObject LoadCam;
    public GameObject nameScreen;
+   public GameObject playerSelectionScreen;
    public static RoomManager instance;
    private string nickname = "AnjaanVyakti";
     
@@ -71,5 +72,38 @@ public class RoomManager : MonoBehaviourPunCallbacks
         _player.GetComponent<PlayerSetup>().isLocalPlayer(lastLength);
         _player.GetComponent<PhotonView>().RPC("setNickname", RpcTarget.AllBuffered, nickname);
         
+    }
+
+
+    //Honestly theres gotta be a better way to do it. but i am sleepy right now, cant be bothered to think too much
+    public void onPLayerModelDuck(){
+        playermodel =0;
+        playerSelectionScreen.SetActive(false);
+        nameScreen.SetActive(true);
+
+    }
+    public void onPLayerModelBase(){
+        playermodel =2;
+        playerSelectionScreen.SetActive(false);
+        nameScreen.SetActive(true);
+
+    }
+    public void onPLayerModelRobot(){
+        playermodel =3;
+        playerSelectionScreen.SetActive(false);
+        nameScreen.SetActive(true);
+
+    }
+   public void onPLayerModelBone(){
+        playermodel =1;
+        playerSelectionScreen.SetActive(false);
+        nameScreen.SetActive(true);
+
+    }
+    public void onPLayerModelSpir(){
+        playermodel =4;
+        playerSelectionScreen.SetActive(false);
+        nameScreen.SetActive(true);
+
     }
 }
