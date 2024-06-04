@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerSetup : MonoBehaviour
 {
   public string nickname;
-  public Movement1 movement;
+  public MultiMovement movement;
   public TextMeshPro nicknameText;
   public GameObject cam;
 

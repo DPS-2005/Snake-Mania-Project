@@ -638,10 +638,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1760192653}
-    - targetCorrespondingSourceObject: {fileID: 1604600736347843682, guid: 43fc2550b36a19d48a8cbdda3ac36d4b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1760192654}
   m_SourcePrefab: {fileID: 100100000, guid: 43fc2550b36a19d48a8cbdda3ac36d4b, type: 3}
 --- !u!1 &1329563989 stripped
 GameObject:
@@ -664,39 +660,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329563989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25de672a6db6be146bacbbcd82dcb975, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  turnspeed: 100
-  growCount: 1
-  bodyPrefab: {fileID: 2290557552424802089, guid: 3666d8824179c7442acff4ca3d470afa,
-    type: 3}
-  head: {fileID: 1604600736347843682, guid: 43fc2550b36a19d48a8cbdda3ac36d4b, type: 3}
-  tail: {fileID: 2290557552424802089, guid: 3666d8824179c7442acff4ca3d470afa, type: 3}
-  gap: 1
-  BodyList: []
---- !u!114 &1760192654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329563989}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2eeec375dcfb8446a31b8ad6df03b4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ef11511d5d7fd046baf48fc5bb0d3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnspeed: 180
-  bodyMoveSpeed: 5
+  growCount: 1
   bodyPrefab: {fileID: 2290557552424802089, guid: 3666d8824179c7442acff4ca3d470afa,
     type: 3}
-  TailPrefab: {fileID: 2290557552424802089, guid: 3666d8824179c7442acff4ca3d470afa,
+  tailPrefab: {fileID: 2290557552424802089, guid: 3666d8824179c7442acff4ca3d470afa,
     type: 3}
-  gap: 48
+  gap: 1
   BodyList: []
+  lastLength: 0
+  ll: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,26 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Photon.Pun;
 
-public class Movement1 : MonoBehaviourPunCallbacks
+public class Movement : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5;
     public float turnspeed = 180;
     private float bodyMoveSpeed;
     public int growCount;
     public GameObject bodyPrefab;
-    public GameObject head;
-    public GameObject tail;
+    public GameObject tailPrefab;
     public float gap;
     public List<GameObject> BodyList = new List<GameObject>();
+    public int lastLength = 0;
+    public int ll = 0;
 
-    public bool isLocalPlayer = false;
-    public  int lastLength = 0;
-    public int ll =0;
-    
     // for wriggling
     // public GameObject cam;
     // public int turnLimit = 50;
@@ -29,11 +26,10 @@ public class Movement1 : MonoBehaviourPunCallbacks
     void Start()
     {
         AddTail();
-        for(int i =0 ; i<=ll; i++){
+        for (int i = 0; i <= ll; i++)
+        {
             IncreaseLength();
         }
-        
-        
     }
 
     void Update()
@@ -49,21 +45,14 @@ public class Movement1 : MonoBehaviourPunCallbacks
         // meowmeow++;
         // transform.Rotate(transform.up, (int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.9) + turnspeed * turn * Time.deltaTime);
         // cam.transform.Rotate(transform.up, -(int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.6));
-        
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Grow(growCount);
         }
 
+        RespawnAndDestroy();
 
-        //check if photonnewtowrk destroy is needed
-        if (Input.GetKeyDown(KeyCode.Escape) && isLocalPlayer)
-        {   
-            RoomManager.instance.RespawnPlayer(lastLength);
-            destroyParts();
-            PhotonNetwork.Destroy(gameObject);
-            
-        }
 
         //moving each body part to its next position
         float initial_speed = moveSpeed;
@@ -73,41 +62,37 @@ public class Movement1 : MonoBehaviourPunCallbacks
             Transform point;
             GameObject body = BodyList[i];
             if (i == 0)
-                {point = transform;
-                
+            {
+                point = transform;
+
                 body.transform.GetChild(1).gameObject.SetActive(false);
-                body.GetComponent<MeshRenderer>().enabled=false;}
+                body.GetComponent<MeshRenderer>().enabled = false;
+            }
             else
                 point = BodyList[i - 1].transform;
-                //Debug.Log(point.position);
+            //Debug.Log(point.position);
             Vector3 pointDir = (point.position - body.transform.position).normalized;
             bodyMoveSpeed = Vector3.Dot(pointDir, point.forward) * initial_speed;
             initial_speed = bodyMoveSpeed;
             body.transform.position += pointDir * bodyMoveSpeed * Time.deltaTime;
             body.transform.LookAt(point);
-            if(i == 5)
-            {
-                //body.transform.Rotate(transform.up, turnspeed * (0.2f-Mathf.PingPong(Time.time, 0.4f)));
-            }
         }
     }
 
-    void IncreaseLength()
+    protected virtual void IncreaseLength()
     {
         GameObject tail = BodyList.Last();
-        
-        // 
-        GameObject body = PhotonNetwork.Instantiate(bodyPrefab.name, tail.transform.position, tail.transform.rotation);
+        GameObject body = Instantiate(bodyPrefab, tail.transform.position, tail.transform.rotation);
         BodyList.Insert(BodyList.Count - 1, body);
-        tail.transform.position -= tail.transform.forward * gap;    
-        lastLength++;    
+        tail.transform.position -= tail.transform.forward * gap;
+        lastLength++;
     }
 
-    void AddTail()
-    {   
-        tail =PhotonNetwork.Instantiate(bodyPrefab.name, transform.position, transform.rotation);
+    protected virtual void AddTail()
+    {
+        GameObject tail = Instantiate(tailPrefab, transform.position, transform.rotation);
         BodyList.Add(tail);
-        
+
     }
 
     void Grow(int n)
@@ -118,14 +103,8 @@ public class Movement1 : MonoBehaviourPunCallbacks
         }
     }
 
+    protected virtual void RespawnAndDestroy()
+    {
 
-    //Raat ke 2 baj gaye hai. Ab mujhe kuch nahi samajh aa raha mai kya code likh raha hoon. 🥲. ALso ham ek hi script me hi kyun sab daal raheee.?
-    void destroyParts(){
-        for (int i = 0; i < BodyList.Count; i++)
-        {
-            GameObject body = BodyList[i];
-            PhotonNetwork.Destroy(body);
-        }
     }
-
 }
