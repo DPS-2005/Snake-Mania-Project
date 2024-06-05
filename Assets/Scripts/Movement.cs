@@ -51,9 +51,6 @@ public class Movement : MonoBehaviourPunCallbacks
             RaycastHit hit;
             if(Physics.Raycast(transform.position, -transform.up, out hit, 4))
             {
-                transform.position = hit.point + hit.normal * 0.5f;
-                transform.up = hit.normal;
-                Debug.Log(transform.up);
             }
         }
 

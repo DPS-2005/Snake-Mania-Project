@@ -2194,7 +2194,7 @@ GameObject:
   - component: {fileID: 625060276}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2208,7 +2208,7 @@ Transform:
   m_GameObject: {fileID: 625060274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.89, y: 4.4, z: 0}
+  m_LocalPosition: {x: -944.8, y: -544.6, z: -30.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2369,7 +2369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9529412}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2626,7 +2626,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 45
-  m_Depth: 0
+  m_Depth: -3.1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 2
@@ -2649,9 +2649,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702472137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8457,10 +8457,10 @@ SceneRoots:
   - {fileID: 543450653026049504}
   - {fileID: 983592491}
   - {fileID: 387105694}
-  - {fileID: 702472141}
   - {fileID: 904395143}
   - {fileID: 1571493210}
   - {fileID: 122383141}
   - {fileID: 516331419}
   - {fileID: 1296112630}
   - {fileID: 1003571481}
+  - {fileID: 702472141}
