@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  deltaSpeed: 0
   maxSpeed: 0
   turnspeed: 180
   growCount: 5
@@ -63,6 +64,7 @@ MonoBehaviour:
   tailObject: {fileID: 0}
   gap: 0
   BodyList: []
+  Segments: []
   lastLength: 0
   ll: 0
   increased: 0

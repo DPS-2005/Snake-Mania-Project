@@ -62,9 +62,11 @@ public class RoomList : MonoBehaviourPunCallbacks
                     if(cachedRoomList[i].Name == room.Name){
                         List<RoomInfo> newList = cachedRoomList;
                         //add the two player criteria here maybe
+                        
                         if(room.RemovedFromList){
                             newList.Remove(newList[i]);
                         }
+                        
                         else{
                             newList[i] = room;
                         }
@@ -83,13 +85,14 @@ public class RoomList : MonoBehaviourPunCallbacks
         }
         foreach(var room in cachedRoomList){
             GameObject roomitem =Instantiate(roomListItemPrefab,roomListParent);
-            roomitem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = room.Name;
-
+            roomitem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = room.Name + " (" + room.PlayerCount + "/" + room.MaxPlayers + ")";
+            roomitem.GetComponent<RoomItemButton>().playcount = room.PlayerCount;
             roomitem.GetComponent<RoomItemButton>().RoomName = room.Name;
         }
     }
 
     public void JoinRoomByName(string _name){
+        
         roomManager.RoomtoJoin = _name;
         roomManagerGO.SetActive(true);
         gameObject.SetActive(false);

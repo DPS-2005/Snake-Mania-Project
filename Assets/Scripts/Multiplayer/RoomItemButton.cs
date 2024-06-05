@@ -5,9 +5,10 @@ using UnityEngine;
 public class RoomItemButton : MonoBehaviour
 {
  public string RoomName;
+ [HideInInspector] public int playcount;
  public void OnButtonPressed(){
-
-    RoomList.Instance.JoinRoomByName(RoomName);
+   if(playcount<2){
+    RoomList.Instance.JoinRoomByName(RoomName);}
  }
 
 }
