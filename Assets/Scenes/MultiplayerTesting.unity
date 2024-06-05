@@ -861,7 +861,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 96ca8ee9dd599634e8b3273434cac34e, type: 2}
+      objectReference: {fileID: 2100000, guid: 444ed8bc48dd2874bac741b310446269, type: 2}
     - target: {fileID: -7219076460700332019, guid: ce466d2ef978aa74ebc61e4569b03907,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -926,34 +926,8 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1244243468}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: -7029948723529949830, guid: ce466d2ef978aa74ebc61e4569b03907,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 674183694}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce466d2ef978aa74ebc61e4569b03907, type: 3}
---- !u!1 &674183693 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: ce466d2ef978aa74ebc61e4569b03907,
-    type: 3}
-  m_PrefabInstance: {fileID: 674183691}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &674183694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674183693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 338e23e57f1f2f549ab2101b263e25f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureSize: 512
-  ObjectsRT: {fileID: 8400000, guid: 0f827ba6e0e92114b8fb86571f052639, type: 2}
-  RippleShader: {fileID: 4800000, guid: 4805204dc34d89b4595ea787a22ab1c2, type: 3}
-  AddShader: {fileID: 4800000, guid: 7f968e0cd6e37f24fb5a44fcf7bf238e, type: 3}
 --- !u!1 &685939024
 GameObject:
   m_ObjectHideFlags: 0
