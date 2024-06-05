@@ -9,26 +9,46 @@ public class AudioManager : Singleton<AudioManager>
     public float soundVolume;
     public Slider soundSlider;
     public Slider musicSlider;
-    private AudioSource source;
+    public AudioSource source;
+    public AudioClip theme;
     void Start()
     {
         source = GetComponent<AudioSource>();
+        soundVolume = soundSlider.value;
+        musicVolume = musicSlider.value;
+        source.clip = theme;
+        source.Play();
     }
 
     public void ChangeSoundVolume()
     {
         soundVolume = soundSlider.value;
-        Debug.Log(soundVolume);
     }
 
     public void ChangeMusicVolume()
     {
         musicVolume = musicSlider.value;
-        Debug.Log(musicVolume);
+        source.volume = musicVolume;
     }
 
     public void PlayOnce( AudioClip clip)
     {
-        source.PlayOneShot(clip);
+        source.PlayOneShot(clip, soundVolume);
+    }
+
+    public void PlayContinuous(AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
+    }
+
+    public void Pause()
+    {
+        source.Pause();
+    }
+
+    public void Play()
+    {
+        source.Play();
     }
 }

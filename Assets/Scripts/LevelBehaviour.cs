@@ -19,11 +19,13 @@ public class LevelBehaviour : MonoBehaviour
     {
         if(collision.collider.tag == "Obstacle" || collision.collider.tag == "Body")
         {
-            //do some effects
+            AudioManager.Instance.PlayOnce(GameManager.Instance.currentLevel.deathSound);
             GameOver();
         }
         if(collision.collider.tag == "Food")
         {
+            AudioManager.Instance.PlayOnce(GameManager.Instance.currentLevel.eatSound);
+            Debug.Log(GameManager.Instance.currentLevel.eatSound);
             GameManager.Instance.IncreaseScore();
             Destroy(collision.gameObject);
             scoreText.text = "Score: " + GameManager.Instance.currentLevel.currentScore;
@@ -32,14 +34,17 @@ public class LevelBehaviour : MonoBehaviour
         }
     }
 
+
     public void Pause()
     {
+        AudioManager.Instance.Pause();
         Time.timeScale = 0;
         GameManager.Instance.paused = true;
     }
 
     public void Resume()
     {
+        AudioManager.Instance.Play();
         Time.timeScale = 1;
         GameManager.Instance.paused = false;
         GameManager.Instance.canvas.transform.GetChild(0).gameObject.SetActive(false);
@@ -63,8 +68,9 @@ public class LevelBehaviour : MonoBehaviour
     public void LoadHomeScreen()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(GameManager.Instance.Home.name);
+        SceneManager.LoadScene("MainMenu");
         GameManager.Instance.Menu.SetActive(true);
+        AudioManager.Instance.PlayContinuous(AudioManager.Instance.theme);
     }
 
     private void Update()

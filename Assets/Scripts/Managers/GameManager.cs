@@ -12,7 +12,6 @@ public class GameManager : Singleton<GameManager>
     public GameObject canvas;
     public LevelModel currentLevel = null;
     public bool paused = true;
-    public SceneAsset Home;
     public string dataPath;
     public GameObject Menu;
 
@@ -43,12 +42,13 @@ public class GameManager : Singleton<GameManager>
 
     public IEnumerator LoadSceneAsync()
     {
-        AsyncOperation loaded = SceneManager.LoadSceneAsync(currentLevel.scene.name);
+        AsyncOperation loaded = SceneManager.LoadSceneAsync(currentLevel.levelID);
         while (!loaded.isDone)
             yield return null;
         Menu.SetActive(false);
         PanelManager.Instance.GoToPreviousPanel();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
+        AudioManager.Instance.PlayContinuous(currentLevel.backgroundSound);
         LoadObstacles();
     }
 
