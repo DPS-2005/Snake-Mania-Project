@@ -35,11 +35,6 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadLevel(string levelID)
     {
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            PanelManager.Instance.GoToPreviousPanel();
-            Menu.SetActive(false);
-        }
         currentLevel = levels[levelID];
         currentLevel.currentScore = 0;
         paused = false;
@@ -51,6 +46,8 @@ public class GameManager : Singleton<GameManager>
         AsyncOperation loaded = SceneManager.LoadSceneAsync(currentLevel.scene.name);
         while (!loaded.isDone)
             yield return null;
+        Menu.SetActive(false);
+        PanelManager.Instance.GoToPreviousPanel();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         LoadObstacles();
     }
@@ -59,5 +56,14 @@ public class GameManager : Singleton<GameManager>
     {
         GameObject SpawnManager = GameObject.FindGameObjectsWithTag("SpawnManager")[0];
         SpawnManager.GetComponent<SpawnManager>().InstantiateObstacles();
+    }
+
+    public void Exit()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 }

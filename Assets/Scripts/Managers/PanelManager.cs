@@ -47,6 +47,8 @@ public class PanelManager : Singleton<PanelManager>
 
     public void GoToPreviousPanel()
     {
+        if (panelQueue.Count <= 1)
+            return;
         PanelModel oldPanel = panelQueue.Peek();
         panelQueue.Pop();
         panelQueue.Peek().panelObject.SetActive(true);
