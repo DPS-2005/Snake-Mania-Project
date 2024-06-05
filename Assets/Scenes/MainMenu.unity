@@ -3451,7 +3451,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Pond
+          m_StringArgument: Desert
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &2325450121994931530
@@ -3841,6 +3841,27 @@ PrefabInstance:
       propertyPath: Menu
       value: 
       objectReference: {fileID: 555091419}
+    - target: {fileID: 8370139732036111580, guid: 4435ab0c8265ee84dbc0288bdfee802e,
+        type: 3}
+      propertyPath: levelList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8370139732036111580, guid: 4435ab0c8265ee84dbc0288bdfee802e,
+        type: 3}
+      propertyPath: levelList.Array.data[1].scene
+      value: 
+      objectReference: {fileID: 102900000, guid: ad48bb5134154024fa9ac776e5ae2f5a,
+        type: 3}
+    - target: {fileID: 8370139732036111580, guid: 4435ab0c8265ee84dbc0288bdfee802e,
+        type: 3}
+      propertyPath: levelList.Array.data[1].levelID
+      value: Desert
+      objectReference: {fileID: 0}
+    - target: {fileID: 8370139732036111580, guid: 4435ab0c8265ee84dbc0288bdfee802e,
+        type: 3}
+      propertyPath: levelList.Array.data[1].deltaScore
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4286,7 +4307,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 100635794487325176}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1853440481}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Pond
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &8019652370063701752
 RectTransform:
   m_ObjectHideFlags: 0

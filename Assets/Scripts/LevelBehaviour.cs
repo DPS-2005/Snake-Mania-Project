@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class LevelBehaviour : MonoBehaviour
 {
 
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI scoreText;
     public SpawnManager spawnManager;
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -22,7 +22,7 @@ public class LevelBehaviour : MonoBehaviour
         {
             GameManager.Instance.IncreaseScore();
             Destroy(collision.gameObject);
-            text.text = "Score: " + GameManager.Instance.currentLevel.currentScore;
+            scoreText.text = "Score: " + GameManager.Instance.currentLevel.currentScore;
             transform.GetComponent<Movement>().increased=true;
             spawnManager.SpawnFood();
         }

@@ -18,12 +18,14 @@ public class Movement : MonoBehaviourPunCallbacks
     public int growCount;
     public GameObject bodyPrefab;
     public GameObject tailObject;
+    public float headGap;
     public float gap;
     public List<GameObject> BodyList = new List<GameObject>();
     public List<Vector3> Segments = new List<Vector3>();
     public int lastLength = 0;
     public int ll = 0;
     public bool increased = false;
+    public bool isTerrain = false;
 
     // for wriggling
     // public GameObject cam;
@@ -44,6 +46,17 @@ public class Movement : MonoBehaviourPunCallbacks
         //Head Movement
         Vector3 prev = transform.position;
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        if (isTerrain)
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position, -transform.up, out hit, 4))
+            {
+                transform.position = hit.point + hit.normal * 0.5f;
+                transform.up = hit.normal;
+                Debug.Log(transform.up);
+            }
+        }
+
         float turn = Input.GetAxis("Horizontal");
         transform.Rotate(transform.up, turnspeed * turn * Time.deltaTime);
         Segments.Insert(0, transform.position - prev);
@@ -53,8 +66,14 @@ public class Movement : MonoBehaviourPunCallbacks
 
         int ind = 0;
         Vector3 point = transform.position;
+        int i = 0;
         foreach(var body in BodyList)
         {
+            var temp = gap;
+            if(i == 0)
+            {
+                gap = headGap;
+            }
             float dist = 0;
             while (ind < Segments.Count && (dist+Vector3.Magnitude(Segments[ind])) <= gap)
             {
@@ -74,6 +93,8 @@ public class Movement : MonoBehaviourPunCallbacks
                 body.transform.position = point;
                 body.transform.forward = Segments[ind].normalized;
             }
+            gap = temp;
+            i++;
         }
         
 
