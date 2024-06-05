@@ -6,19 +6,21 @@ using UnityEngine.Rendering;
 using Photon.Pun;
 using System;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5;
+    public float deltaSpeed;
     public float maxSpeed;
     public float turnspeed = 180;
     private float bodyMoveSpeed;
     public int growCount;
     public GameObject bodyPrefab;
     public GameObject tailObject;
-    public int gap;
+    public float gap;
     public List<GameObject> BodyList = new List<GameObject>();
-    public List<Tuple<Vector3, Quaternion>> TransformHistory = new List<Tuple<Vector3, Quaternion>>();
+    public List<Vector3> Segments = new List<Vector3>();
     public int lastLength = 0;
     public int ll = 0;
     public bool increased = false;
@@ -40,36 +42,45 @@ public class Movement : MonoBehaviourPunCallbacks
     void Update()
     {
         //Head Movement
+        Vector3 prev = transform.position;
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
         float turn = Input.GetAxis("Horizontal");
         transform.Rotate(transform.up, turnspeed * turn * Time.deltaTime);
-        TransformHistory.Insert(0, new Tuple<Vector3,Quaternion>(transform.position, transform.rotation));
-        if(TransformHistory.Count >= 1000)
-            TransformHistory.RemoveAt(TransformHistory.Count - 1);
-        // For Wriggling. Not perfect yet. Causes jitter. Needs better solution
-        // if(meowmeow>turnLimit){  turnflag = !turnflag; meowmeow = 0;}
-        // Debug.Log(turnflag+" "+meowmeow);
-        // meowmeow++;
-        // transform.Rotate(transform.up, (int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.9) + turnspeed * turn * Time.deltaTime);
-        // cam.transform.Rotate(transform.up, -(int)(((turnflag?1:-1)*turnspeed * Time.deltaTime)*0.6));
-
+        Segments.Insert(0, transform.position - prev);
+        if (Segments.Count >= 10000)
+            Segments.RemoveAt(Segments.Count - 1);
         RespawnAndDestroy();
 
-        int index = 1;
-        foreach (var body in BodyList)
+        int ind = 0;
+        Vector3 point = transform.position;
+        foreach(var body in BodyList)
         {
-            //Debug.Log(index * gap);
-            //Debug.Log(Mathf.Min(index * gap, TransformHistory.Count - 1));
-            Tuple<Vector3, Quaternion> point = TransformHistory[Mathf.Min(index * gap, TransformHistory.Count - 1)];
-            body.transform.position = point.Item1;     
-            body.transform.rotation = point.Item2;
-            index++;
+            float dist = 0;
+            while (ind < Segments.Count && (dist+Vector3.Magnitude(Segments[ind])) <= gap)
+            {
+                dist += Vector3.Magnitude(Segments[ind]);
+                point -= Segments[ind];
+                ind++;
+            }
+            if(ind == Segments.Count)
+            {
+                point -= Segments[ind - 1].normalized * (gap-dist);
+                body.transform.position = point;
+                body.transform.forward = Segments[ind - 1].normalized;
+            }
+            else
+            {
+                point -= Segments[ind].normalized * (gap - dist);
+                body.transform.position = point;
+                body.transform.forward = Segments[ind].normalized;
+            }
         }
+        
 
         if (increased)
         {
             Grow();
-            moveSpeed = Mathf.Min(moveSpeed + 1, maxSpeed);
+            moveSpeed = Mathf.Min(moveSpeed + deltaSpeed, maxSpeed);
             increased = false;
         }
     }
@@ -85,9 +96,7 @@ public class Movement : MonoBehaviourPunCallbacks
 
     protected virtual void AddTail()
     {
-        //GameObject tail = Instantiate(tailPrefab, transform.position - transform.forward*gap, transform.rotation);
         BodyList.Add(tailObject);
-
     }
 
     public void Grow()
