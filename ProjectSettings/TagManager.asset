@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - SpawnManager
   - Canvas
+  - Body
   layers:
   - Default
   - TransparentFX

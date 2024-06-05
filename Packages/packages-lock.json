@@ -154,7 +154,7 @@
       "url": "https://packages.unity.com"
     },
     "com.verasl.water-system": {
-      "version": "file:C:/Users/hkusi/Downloads/BoatAttack-2020.1.0f1/Packages/com.verasl.water-system",
+      "version": "file:C:/Users/divya/GameProjects/BoatAttack/Packages/com.verasl.water-system",
       "depth": 0,
       "source": "local",
       "dependencies": {

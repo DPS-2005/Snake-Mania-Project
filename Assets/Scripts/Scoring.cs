@@ -13,7 +13,7 @@ public class Scoring : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag == "Obstacle" || collision.collider.tag == "Player")
+        if(collision.collider.tag == "Obstacle" || collision.collider.tag == "Body")
         {
             //do some effects
             GameOver();
