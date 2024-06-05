@@ -27,10 +27,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void JoinButtonPressed(){
         Debug.Log("Starting Connection");
-        // RoomOptions options = new RoomOptions();
-        // options.MaxPlayers = 2;
-        // PhotonNetwork.JoinOrCreateRoom(RoomtoJoin, options, null);
-        PhotonNetwork.JoinOrCreateRoom(RoomtoJoin, null, null);
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = 2;
+        PhotonNetwork.JoinOrCreateRoom(RoomtoJoin, options, null);
+        // PhotonNetwork.JoinOrCreateRoom(RoomtoJoin, null, null);
         nameScreen.SetActive(false);
         LoadCam.SetActive(true);
     }
@@ -44,6 +44,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
        
         if(playermodel>=Player.Count){playermodel=Player.Count-1;}
         
+    }
+    public void OnPhotonJoinRoomFailed(){
+        Debug.Log("Failed to join room");
     }
 
  
