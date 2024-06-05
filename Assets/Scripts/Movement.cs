@@ -26,6 +26,7 @@ public class Movement : MonoBehaviourPunCallbacks
     public int ll = 0;
     public bool increased = false;
     public bool isTerrain = false;
+    private CharacterController controller;
 
     // for wriggling
     // public GameObject cam;
@@ -45,14 +46,8 @@ public class Movement : MonoBehaviourPunCallbacks
     {
         //Head Movement
         Vector3 prev = transform.position;
+
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
-        if (isTerrain)
-        {
-            RaycastHit hit;
-            if(Physics.Raycast(transform.position, -transform.up, out hit, 4))
-            {
-            }
-        }
 
         float turn = Input.GetAxis("Horizontal");
         transform.Rotate(transform.up, turnspeed * turn * Time.deltaTime);

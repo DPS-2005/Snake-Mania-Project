@@ -13,10 +13,11 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     public Transform[] foodSpawnPoints;
     public List<Transform> obstacleInstantiationPoints;
     public float obstacleArea;
+    public Vector3 foodPosition;
 
     private void Start()
     {
-        SpawnFood();
+        foodPosition = SpawnFood();
     }
     public void InstantiateObstacles()
     {
@@ -31,20 +32,29 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void SpawnFood()
+    public Vector3 SpawnFood()
     {
         int position_index = Random.Range(0, foodSpawnPoints.Length);
+        while (Vector3.Distance(foodSpawnPoints[position_index].position, foodPosition) <= 5)
+        {
+            position_index = Random.Range(0, foodSpawnPoints.Length);
+        }
         int food_index = Random.Range(0, foods.Length);
-        Spawn(foods[food_index], foodSpawnPoints[position_index]);
+        return foodPosition = Spawn(foods[food_index], foodSpawnPoints[position_index]);
     }
 
-    public void Spawn(GameObject _object, Transform point)
+    public Vector3 Spawn(GameObject _object, Transform point)
     {
         RaycastHit hit;
         if (Physics.Raycast(point.position, -Vector3.up, out hit))
         {
             Vector3 location = new Vector3(hit.point.x, hit.point.y + 0.5f, hit.point.z);
-            Instantiate(_object, location, Quaternion.identity);
+            Instantiate(_object, location, _object.transform.rotation);
+            return location;
+        }
+        else
+        {
+            return Vector3.zero;
         }
     }
 }

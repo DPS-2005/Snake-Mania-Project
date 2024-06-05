@@ -4,12 +4,15 @@ using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class LevelBehaviour : MonoBehaviour
 {
 
     public TextMeshProUGUI scoreText;
     public SpawnManager spawnManager;
+    public GameObject arrow;
+    public float arrowOffset;
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
@@ -39,6 +42,7 @@ public class LevelBehaviour : MonoBehaviour
         Time.timeScale = 1;
         GameManager.Instance.paused = false;
         GameManager.Instance.canvas.transform.GetChild(0).gameObject.SetActive(false);
+        arrow.SetActive(true);
     }
 
     public void GameOver()
@@ -67,7 +71,14 @@ public class LevelBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.paused)
         {
             Pause();
+            arrow.SetActive(false);
             GameManager.Instance.canvas.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            arrow.transform.position = transform.position +new Vector3(0, arrowOffset, 0);
+            arrow.transform.right = (transform.position - spawnManager.foodPosition).normalized;
+            //Debug.DrawRay(arrow.transform.position, spawnManager.foodPosition - transform.position, Color.red, 1);
         }
     }
 }
