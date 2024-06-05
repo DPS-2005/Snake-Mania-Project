@@ -7,7 +7,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {    
     public List<GameObject> Player;
     public int playermodel = 0;
-    public Transform SpawnPoint;
+    public Transform[] SpawnPoints;
    [Space]
    public GameObject LoadCam;
    public GameObject nameScreen;
@@ -56,22 +56,25 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Transform SpawnPoint = SpawnPoints[UnityEngine.Random.Range(0, SpawnPoints.Length)];
         LoadCam.SetActive(false);
         base.OnJoinedRoom();
         Debug.Log("Joined Room");
         GameObject _player = PhotonNetwork.Instantiate(Player[playermodel].name, SpawnPoint.position, SpawnPoint.rotation);
         _player.GetComponent<PlayerSetup>().isLocalPlayer();
         _player.GetComponent<PhotonView>().RPC("setNickname", RpcTarget.All, nickname);
+        PhotonNetwork.LocalPlayer.NickName = nickname;
         
     }
 
 
     public void RespawnPlayer(int lastLength){
         // destroy the current player in player script. Also remeber to take into account currrrent score and use it to spawn the player with corresponding length
+        Transform SpawnPoint = SpawnPoints[UnityEngine.Random.Range(0, SpawnPoints.Length)];
         GameObject _player = PhotonNetwork.Instantiate(Player[playermodel].name, SpawnPoint.position, SpawnPoint.rotation);
         _player.GetComponent<PlayerSetup>().isLocalPlayer(lastLength);
         _player.GetComponent<PhotonView>().RPC("setNickname", RpcTarget.AllBuffered, nickname);
-        
+        PhotonNetwork.LocalPlayer.NickName = nickname;
     }
 
 
