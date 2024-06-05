@@ -13,6 +13,7 @@ public class LevelBehaviour : MonoBehaviour
     public SpawnManager spawnManager;
     public GameObject arrow;
     public float arrowOffset;
+    public float spawnOffset;
 
     protected virtual void OnCollisionEnter(Collision collision)
     {

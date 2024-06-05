@@ -15,4 +15,5 @@ public class LevelModel
     public int highScore;
     public int currentScore;
     public int deltaScore;
+    public AudioClip backgroundSound;
 }

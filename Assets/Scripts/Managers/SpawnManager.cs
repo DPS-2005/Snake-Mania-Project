@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     public Transform[] foodSpawnPoints;
     public List<Transform> obstacleInstantiationPoints;
     public float obstacleArea;
+    public float spawnOffset;
     public Vector3 foodPosition;
 
     private void Start()
@@ -48,7 +49,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         RaycastHit hit;
         if (Physics.Raycast(point.position, -Vector3.up, out hit))
         {
-            Vector3 location = new Vector3(hit.point.x, hit.point.y + 0.5f, hit.point.z);
+            Vector3 location = new Vector3(hit.point.x, hit.point.y + spawnOffset, hit.point.z);
             Instantiate(_object, location, _object.transform.rotation);
             return location;
         }
