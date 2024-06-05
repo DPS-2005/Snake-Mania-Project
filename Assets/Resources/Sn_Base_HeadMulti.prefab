@@ -55,17 +55,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxSpeed: 0
   turnspeed: 180
   growCount: 5
   bodyPrefab: {fileID: 2290557552424802089, guid: ebd69fae35d09264992ef2bd14fe8d87,
     type: 3}
-  head: {fileID: 1604600736347843682}
-  tail: {fileID: 2290557552424802089, guid: 42f039d2a3bb8474d83454f3e13e2a92, type: 3}
-  gap: 0.25
+  tailObject: {fileID: 0}
+  gap: 0
   BodyList: []
-  isLocalPlayer: 0
   lastLength: 0
   ll: 0
+  increased: 0
+  isLocalPlayer: 0
 --- !u!114 &8771421401580553839
 MonoBehaviour:
   m_ObjectHideFlags: 0
