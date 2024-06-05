@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,9 +12,13 @@ public class GameManager : Singleton<GameManager>
     public GameObject canvas;
     public LevelModel currentLevel = null;
     public bool paused = true;
+    public SceneAsset Home;
+    public string dataPath;
+    public GameObject Menu;
 
     private void Start()
     {
+        dataPath = Application.persistentDataPath + "/levelData.json";
         levels = new Dictionary<string, LevelModel>();
         foreach(var level in levelList)
         {
@@ -30,6 +35,11 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadLevel(string levelID)
     {
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            PanelManager.Instance.GoToPreviousPanel();
+            Menu.SetActive(false);
+        }
         currentLevel = levels[levelID];
         currentLevel.currentScore = 0;
         paused = false;

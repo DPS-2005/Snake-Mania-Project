@@ -861,6 +861,7 @@ GameObject:
   - component: {fileID: 555091422}
   - component: {fileID: 555091421}
   - component: {fileID: 555091420}
+  - component: {fileID: 555091424}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -954,6 +955,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &555091424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555091419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b948e85d93cd4345b3dad7c4f3de650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &567359733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3831,6 +3844,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8370139732036111580, guid: 4435ab0c8265ee84dbc0288bdfee802e,
+        type: 3}
+      propertyPath: Home
+      value: 
+      objectReference: {fileID: 102900000, guid: b13cb6cc14ac36342a0b77c5be904326,
+        type: 3}
+    - target: {fileID: 8370139732036111580, guid: 4435ab0c8265ee84dbc0288bdfee802e,
+        type: 3}
+      propertyPath: Menu
+      value: 
+      objectReference: {fileID: 555091419}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

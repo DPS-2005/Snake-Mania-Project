@@ -10,7 +10,6 @@ public class PanelManager : Singleton<PanelManager>
     public List<PanelModel> panels;
     private Stack<PanelModel> panelQueue;
 
-
     private void Start()
     {
         panelQueue = new Stack<PanelModel>();
