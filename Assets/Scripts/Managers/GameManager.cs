@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,9 +12,13 @@ public class GameManager : Singleton<GameManager>
     public GameObject canvas;
     public LevelModel currentLevel = null;
     public bool paused = true;
+    public SceneAsset Home;
+    public string dataPath;
+    public GameObject Menu;
 
     private void Start()
     {
+        dataPath = Application.persistentDataPath + "/levelData.json";
         levels = new Dictionary<string, LevelModel>();
         foreach(var level in levelList)
         {
@@ -41,6 +46,8 @@ public class GameManager : Singleton<GameManager>
         AsyncOperation loaded = SceneManager.LoadSceneAsync(currentLevel.scene.name);
         while (!loaded.isDone)
             yield return null;
+        Menu.SetActive(false);
+        PanelManager.Instance.GoToPreviousPanel();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         LoadObstacles();
     }
@@ -49,5 +56,14 @@ public class GameManager : Singleton<GameManager>
     {
         GameObject SpawnManager = GameObject.FindGameObjectsWithTag("SpawnManager")[0];
         SpawnManager.GetComponent<SpawnManager>().InstantiateObstacles();
+    }
+
+    public void Exit()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 }

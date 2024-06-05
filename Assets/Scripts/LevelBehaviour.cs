@@ -5,7 +5,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Scoring : MonoBehaviour
+public class LevelBehaviour : MonoBehaviour
 {
 
     public TextMeshProUGUI text;
@@ -53,6 +53,13 @@ public class Scoring : MonoBehaviour
         GameManager.Instance.paused = false;
         GameManager.Instance.canvas.transform.GetChild(1).gameObject.SetActive(false);
         GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel.levelID);
+    }
+
+    public void LoadHomeScreen()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(GameManager.Instance.Home.name);
+        GameManager.Instance.Menu.SetActive(true);
     }
 
     private void Update()
